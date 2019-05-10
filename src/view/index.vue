@@ -1,113 +1,67 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+  <div class="content-wrapper">
+    <Layout>
+      <Header>
+        <Menu mode="horizontal" theme="dark" :active-name="active" @on-select="changeMenu">
+          <!--<div class="layout-logo">
+
+          </div>-->
+          <template v-for="item in appMenu">
+            <MenuItem  v-if="!item.item" :key="item.name" :name="item.link">
+              {{ item.name }}
+            </MenuItem>
+            <Submenu v-if="item.item" :name="item.link" :key="item.name">
+              <template slot="title">
+                <span class="layout-text">{{ item.name }}</span>
+              </template>
+              <template v-for="child in item.item">
+                <MenuItem :name="child.link" :key="child.name">
+                  {{ child.name }}
+                </MenuItem>
+              </template>
+            </Submenu>
+
+          </template>
+
+        </Menu>
+      </Header>
+      <Content >
+
+        <transition>
+          <router-view :key="key" style="padding: 20px 10px; display: inline"></router-view>
+        </transition>
+
+      </Content>
+    </Layout>
   </div>
 </template>
 
 <script>
+  import {appMenus} from '../store/appMenus'
   export default {
-    name: 'HelloWorld',
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        msg: '你是谁啊',
+        appMenu:appMenus.menus,
+        active:'home',
       }
-    }
+    },
+    methods:{
+      changeMenu:(item)=>{
+        console.log(item)
+        this.$router.push({name:item})
+      }
+    },
+    computed:{},
+
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  h1, h2 {
-    font-weight: normal;
+<style >
+  .content-wrapper{
+    width:100%;
+    height: 100%;
   }
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-  a {
-    color: #42b983;
-  }
+
 </style>
