@@ -16,6 +16,43 @@ export const appRouter = {
       icon: 'home',
       label: '首页',
       component:()=>import('../view/home')
+    },
+    {
+      path:'map',
+      name:'map',
+      icon: 'map',
+      label: 'map',
+      component:()=>import('../view/map')
+    },
+    {
+      path:'table',
+      name:'table',
+      icon: 'table',
+      label: 'Table',
+      component:()=>import('../view/table')
+    },
+    {
+      path:'graph',
+      name:'graph',
+      icon: 'graph',
+      label: 'Graph',
+      component:()=>import('../view/graph'),
+      children:[
+        {
+          path:'lianxian',
+          name:'连线',
+          icon: 'lianxian',
+          label: 'lianxian',
+          component:()=>import('../view/graph/lianxian')
+        },
+        {
+          path:'zIndex',
+          name:'连线',
+          icon: 'zIndex',
+          label: 'zIndex',
+          component:()=>import('../view/graph/zIndex')
+        },
+      ]
     }
   ]
 }

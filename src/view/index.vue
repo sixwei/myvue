@@ -28,7 +28,7 @@
       <Content >
 
         <transition>
-          <router-view :key="key" style="padding: 20px 10px; display: inline"></router-view>
+          <router-view style="padding: 20px 10px; display: inline"></router-view>
         </transition>
 
       </Content>
@@ -47,7 +47,7 @@
       }
     },
     methods:{
-      changeMenu:(item)=>{
+      changeMenu(item){
         console.log(item)
         this.$router.push({name:item})
       }

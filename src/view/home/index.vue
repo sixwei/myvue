@@ -7,7 +7,6 @@
 
 <script>
   export default {
-    name: 'HelloWorld',
     data () {
       return {
         msg: '这是home主页'
